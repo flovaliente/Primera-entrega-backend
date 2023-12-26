@@ -1,0 +1,70 @@
+<div class="card-group">
+  <h1>Products</h1>
+  <form id="form" action="/api/products/" method="post" enctype="multipart/form-data">
+  <div class="grid">
+    <label for="title">
+      Title:
+      <input type="text" id="title" name="title" placeholder="Title" required/>
+    </label>
+    <label for="description">
+      Description:
+      <input type="text" id="description" name="description" placeholder="Description" required/>
+    </label>
+    <label for="code">
+      Code:
+      <input type="text" id="code" name="code" placeholder="Code" required/>
+    </label>
+    <label for="price">
+      Price:
+      <input type="number" id="price" name="price" placeholder="Price" required/>
+    </label>
+    <label for="stock">
+      Stock:
+      <input type="number" id="stock" name="stock" placeholder="Stock" required/>
+    </label>
+    <label for="category">
+      Category:
+      <input type="text" id="category" name="category" placeholder="Category" required/>
+    </label>
+    <label for="thumbnails">
+      Thumbnails:
+      <input type="file" id="thumbnails" name="thumbnails" placeholder="Thumbnails" required/>
+    </label>
+  </div>
+  <button type="submit" id="submit">Add product</button>
+</form>
+<form id="deleteForm">
+<div>
+  <label for="idDelete">
+    Insert the product id to Delete:
+    <input type="text" id="idDelete" name="idDelete" placeholder="Product ID to delete" required/>
+  </label>
+  <button type="submit" id="delete" class="contrast">Delete Product</button>
+  </form>
+</div>
+<div id="productsSocket">
+</div>
+  {{#each payload}}
+    <div class="central">
+        <div class="cntrlBox">
+            <div class="container-products" id="seccionprod">
+                  <div class="products" id="{{this._id}}">
+                      <img src="{{this.thumbnails}}" class="product__img" width="400" height="430" >
+                      <div class="product-description">
+                        <h3 class="product__title">{{this.title}}</h3>
+                        <span class="product-price">$ {{this.price}}</span>
+                      </div>
+                      
+                      <a href="http://localhost:8080/api/products/{{this._id}}" role="button" class="btn btn-secondary">Add to cart</a>
+                      
+                  
+                  </div>
+            </div>
+        </div>
+    </div>
+  {{/each }}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/products/index.js"></script>
